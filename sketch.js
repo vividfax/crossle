@@ -13,6 +13,8 @@ let scoreFont;
 
 let palette;
 
+let puzzleNumber;
+
 function preload() {
 
     scoreFont = loadFont("./fonts/Nunito-SemiBold.ttf");
@@ -51,6 +53,11 @@ function setup() {
     if (month < 10) month = "0"+month;
     let seed = day+""+month+""+d.getFullYear();
 
+    let startDate = new Date("05/22/2023");
+    let todayDate = new Date();
+    let difference = startDate.getTime()-todayDate.getTime();
+    puzzleNumber = int(difference/(1000*60*60*24));
+
     randomSeed(seed);
 
     newGame();
@@ -65,7 +72,7 @@ function draw() {
     fabric.display(frontVisible);
 
     saveImageButton.style("display", "none");
-    if (fabric.complete()) displayUI(fabricLayer);
+    if (fabric.complete()) displayUI(fabricLayer, frontVisible);
 
     resetButton.style("display", "none");
     if (fabric.complete()) resetButton.style("display", "inline");
@@ -89,7 +96,7 @@ function mousePressed() {
     fabric.sew();
 }
 
-function displayUI(cnvs) {
+function displayUI(cnvs, frontSide) {
 
     cnvs.push();
     cnvs.noStroke();
@@ -99,11 +106,18 @@ function displayUI(cnvs) {
     cnvs.textAlign(LEFT, TOP);
     cnvs.textFont(scoreFont);
 
-    if (frontVisible || cnvs == exportLayer) {
-        cnvs.text(fabric.getFlossUsed(), width/30, width/150);
+    if (frontSide) {
+        cnvs.text("#"+puzzleNumber, width/30, width/150);
+        cnvs.textAlign(RIGHT, TOP);
+        cnvs.text(fabric.getFlossUsed(), width-width/30, width/150);
     } else {
+        palette.dark.setAlpha(50);
+        cnvs.fill(palette.dark);
         cnvs.scale(-1, 1);
-        cnvs.text(fabric.getFlossUsed(), width/30-width, width/150);
+        cnvs.text("#"+puzzleNumber, width/30-width, width/150);
+        cnvs.textAlign(RIGHT, TOP);
+        cnvs.text(fabric.getFlossUsed(), width-width/30-width, width/150);
+        palette.dark.setAlpha(100);
     }
 
     cnvs.pop();
@@ -120,9 +134,11 @@ function saveImage() {
     exportLayer.translate(10, 10);
     fabric.display(true);
     exportLayer.image(fabricLayer, 0, 0);
-    displayUI(exportLayer);
+    displayUI(exportLayer, true);
+    exportLayer.translate(width+10, 0);
     fabric.display(false);
-    exportLayer.image(fabricLayer, width+10, 0);
+    exportLayer.image(fabricLayer, 0, 0);
+    displayUI(exportLayer, false);
 
     exportLayer.pop();
 
