@@ -5,7 +5,7 @@ class Fabric {
         this.holes = [];
         this.path = [];
 
-        let padding = 15;
+        let padding = width/14;
         this.spacing = (width-padding*2)/8;
         let index = 0;
         for (let i = padding; i <= width-padding/2; i += this.spacing) {
@@ -63,10 +63,6 @@ class Fabric {
         if (this.path.length > 1 && this.path[0] == this.path[this.path.length-1]) return true;
     }
 
-    finish() {
-
-    }
-
     display() {
 
         if (frontVisible) this.pattern.display();
@@ -86,38 +82,38 @@ class Fabric {
             strokeWeight(6);
             for (let i = 0; i < this.path.length-1; i += 2) {
                 stroke(100);
-                strokeWeight(10);
+                strokeWeight(width/20);
                 line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
                 stroke(150);
-                strokeWeight(6);
+                strokeWeight(width/30);
                 if (i == this.path.length-2 && !this.complete()) stroke(255);
                 line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
             }
             if (this.path.length == 1 || !this.complete()) {
                 stroke(100);
-                strokeWeight(2);
+                strokeWeight(width/150);
                 fill(150);
-                ellipse(this.holes[this.path[0]].x, this.holes[this.path[0]].y, 15);
+                ellipse(this.holes[this.path[0]].x, this.holes[this.path[0]].y, width/15);
                 fill(255);
-                ellipse(this.holes[this.path[this.path.length-1]].x, this.holes[this.path[this.path.length-1]].y, 15);
+                ellipse(this.holes[this.path[this.path.length-1]].x, this.holes[this.path[this.path.length-1]].y, width/15);
             }
         } else {
             for (let i = 1; i < this.path.length-1; i += 2) {
                 stroke(100);
-                strokeWeight(10);
+                strokeWeight(width/20);
                 line(width-this.holes[this.path[i]].x, this.holes[this.path[i]].y, width-this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
                 stroke(150);
-                strokeWeight(6);
+                strokeWeight(width/30);
                 if (i == this.path.length-2 && !this.complete()) stroke(255);
                 line(width-this.holes[this.path[i]].x, this.holes[this.path[i]].y, width-this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
             }
             if (this.path.length == 1 || !this.complete()) {
                 stroke(100);
-                strokeWeight(2);
+                strokeWeight(width/150);
                 fill(150);
-                ellipse(width-this.holes[this.path[0]].x, this.holes[this.path[0]].y, 15);
+                ellipse(width-this.holes[this.path[0]].x, this.holes[this.path[0]].y, width/15);
                 fill(255);
-                ellipse(width-this.holes[this.path[this.path.length-1]].x, this.holes[this.path[this.path.length-1]].y, 15);
+                ellipse(width-this.holes[this.path[this.path.length-1]].x, this.holes[this.path[this.path.length-1]].y, width/15);
             }
         }
     }

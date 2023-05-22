@@ -6,7 +6,7 @@ class Hole {
         this.x = x;
         this.y = y;
 
-        this.radius = 8;
+        this.radius = width/25;
     }
 
     update() {
@@ -21,7 +21,7 @@ class Hole {
     display() {
 
         noStroke();
-        fill(220);
+        fill(210);
         rectMode(CENTER);
         rect(this.x, this.y, this.radius, this.radius);
     }

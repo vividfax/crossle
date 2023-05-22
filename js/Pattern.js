@@ -26,7 +26,7 @@ class Pattern {
         translate(this.left, this.top);
         translate(this.spacing/2, this.spacing/2);
 
-        fill(240);
+        fill(230);
         noStroke();
 
         let index = 0;

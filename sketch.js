@@ -1,5 +1,4 @@
 let fabric;
-let floss;
 
 let frontVisible = true;
 
@@ -7,7 +6,13 @@ function setup() {
 
     document.addEventListener('touchstart', {});
 
-    createCanvas(200, 200);
+    let size = 200;
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        size = displayWidth < displayHeight ? displayWidth : displayHeight;
+    }
+
+    createCanvas(size, size);
 
     let d = new Date();
     let day = d.getDate();
@@ -37,20 +42,24 @@ function draw() {
 function newGame() {
 
     fabric = new Fabric();
-    floss = new Floss();
 }
 
 function mousePressed() {
 
-    if (mouseButton == LEFT) fabric.sew();
-    else fabric.finish();
+    fabric.sew();
 }
 
 function displayUI() {
 
     noStroke();
     fill(100);
-    textSize(20);
+    textSize(width/10);
     textAlign(LEFT, TOP);
-    text(fabric.getFlossUsed(), 8, 6);
+
+    if (frontVisible) {
+        text(fabric.getFlossUsed(), width/30, width/30);
+    } else {
+        scale(-1, 1);
+        text(fabric.getFlossUsed(), width/30-width, width/30);
+    }
 }
