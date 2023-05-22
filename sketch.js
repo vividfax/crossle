@@ -60,8 +60,8 @@ function setup() {
     let difference = startDate.getTime()-todayDate.getTime();
     puzzleNumber = int(difference/(1000*60*60*24));
 
-    randomSeed(seed);
-    noiseSeed(seed);
+    // randomSeed(seed);
+    // noiseSeed(seed);
 
     newGame();
 }
@@ -87,7 +87,7 @@ function newGame() {
 
     palette = {
         white: color(random(100), random(0, 10), random(80, 100)),
-        light: color(random(100), random(20, 30), random(80, 100)),
+        light: color(random(100), random(20, 40), random(80, 100)),
         mid: color(random(100), 100, 90),
         dark: color(random(100), 100, 30),
     }
