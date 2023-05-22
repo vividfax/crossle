@@ -106,6 +106,8 @@ function newGame() {
     perlinLayer.updatePixels();
 
     fabric = new Fabric();
+
+    // fabric.path = presetPath;
 }
 
 function mousePressed() {
@@ -144,7 +146,7 @@ function displayUI(cnvs, frontSide) {
 
 function saveImage() {
 
-    exportLayer.background("#333");
+    exportLayer.background("#322932");
 
     exportLayer.push();
 
