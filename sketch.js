@@ -93,7 +93,7 @@ function newGame() {
 
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
-            let perlin = noise(i*0.01, j*0.01);
+            let perlin = noise(i/width*1.5, j/width*1.5);
             let colour = lerpColor(palette.light, palette.white, perlin);
             perlinLayer.set(i, j, colour);
         }
