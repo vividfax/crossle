@@ -10,10 +10,13 @@ class Pattern {
         this.top = height/2 - this.h*spacing/2;
 
         this.pattern = [];
+
         for (let i = 0; i < w*h; i++) {
-            if (random() < 0.6) this.pattern.push(true);
+            if (i < w*h*0.6) this.pattern.push(true);
             else this.pattern.push(false);
         }
+
+        shuffle(this.pattern, true);
     }
 
     update() {

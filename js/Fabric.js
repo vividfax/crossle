@@ -19,8 +19,8 @@ class Fabric {
 
         this.pattern = new Pattern(6, 6, this.spacing);
 
-        this.fromColour = color("#12263A");
-        this.toColour = color("#06BCC1");
+        this.fromColour = palette.dark;
+        this.toColour = palette.light;
         this.shadowColour = lerpColor(this.fromColour, this.toColour, 0.5);
     }
 
@@ -78,7 +78,7 @@ class Fabric {
     display(frontSide) {
 
         fabricLayer.background(255);
-        if (this.complete()) fabricLayer.background("#C5D8D1");
+        if (this.complete()) fabricLayer.background(palette.white);
 
         if (frontSide) this.pattern.display();
 

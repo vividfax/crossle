@@ -11,6 +11,8 @@ let resetButton;
 
 let scoreFont;
 
+let palette;
+
 function preload() {
 
     scoreFont = loadFont("./fonts/Nunito-SemiBold.ttf");
@@ -27,6 +29,7 @@ function setup() {
     }
 
     myCanvas = createCanvas(size, size);
+    colorMode(HSB, 100);
     
     fabricLayer = createGraphics(size, size);
     exportLayer = createGraphics(size*2+30, size+20);
@@ -72,6 +75,12 @@ function draw() {
 
 function newGame() {
 
+    palette = {
+        white: color(random(100), random(5, 10), 80),
+        light: color(random(100), 80, 100),
+        dark: color(random(100), 100, 30),
+    }
+
     fabric = new Fabric();
 }
 
@@ -85,7 +94,7 @@ function displayUI(cnvs) {
     cnvs.push();
     cnvs.noStroke();
     cnvs.strokeJoin(ROUND);
-    cnvs.fill("#12263A");
+    cnvs.fill(palette.dark);
     cnvs.textSize(width/10);
     cnvs.textAlign(LEFT, TOP);
     cnvs.textFont(scoreFont);
