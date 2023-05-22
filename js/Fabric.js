@@ -4,6 +4,7 @@ class Fabric {
 
         this.holes = [];
         this.path = [];
+        this.hoverStitch = -1;
 
         let padding = width/14;
         this.spacing = (width-padding*2)/8;
@@ -25,6 +26,13 @@ class Fabric {
 
     update() {
 
+        this.hoverStitch = -1;
+
+        for (let i = 0; i < this.holes.length; i++) {
+            if (this.holes[i].hover() && this.path[this.path.length-1] != this.holes[i].index) {
+                this.hoverStitch = this.holes[i].index;
+            }
+        }
     }
 
     sew() {
@@ -91,6 +99,14 @@ class Fabric {
                 if (i == this.path.length-2 && !this.complete()) fabricLayer.stroke(255);
                 if (this.complete()) fabricLayer.stroke(lerpColor(this.fromColour, this.toColour, i/this.path.length));
                 fabricLayer.line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
+            }
+            if (this.path.length%2 == 1 & this.hoverStitch != -1) {
+                fabricLayer.stroke(100);
+                fabricLayer.strokeWeight(width/20);
+                fabricLayer.line(this.holes[this.path[this.path.length-1]].x, this.holes[this.path[this.path.length-1]].y, this.holes[this.hoverStitch].x, this.holes[this.hoverStitch].y);
+                fabricLayer.stroke(255);
+                fabricLayer.strokeWeight(width/20-width/75);
+                fabricLayer.line(this.holes[this.path[this.path.length-1]].x, this.holes[this.path[this.path.length-1]].y, this.holes[this.hoverStitch].x, this.holes[this.hoverStitch].y);
             }
             if (this.path.length == 1 || !this.complete()) {
                 fabricLayer.stroke(100);
