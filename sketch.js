@@ -4,6 +4,7 @@ let frontVisible = true;
 
 let myCanvas;
 let fabricLayer;
+let perlinLayer;
 let exportLayer;
 
 let saveImageButton;
@@ -34,6 +35,7 @@ function setup() {
     colorMode(HSB, 100);
     
     fabricLayer = createGraphics(size, size);
+    perlinLayer = createGraphics(size, size);
     exportLayer = createGraphics(size*2+30, size+20);
 
     saveImageButton = select("#save-image");
@@ -84,9 +86,20 @@ function newGame() {
 
     palette = {
         white: color(random(100), random(0, 10), random(80, 100)),
-        light: color(random(100), 80, 100),
+        light: color(random(100), random(20, 30), random(80, 100)),
+        mid: color(random(100), 80, 100),
         dark: color(random(100), 100, 30),
     }
+
+    for (let i = 0; i < width; i++) {
+        for (let j = 0; j < height; j++) {
+            let perlin = noise(i*0.01, j*0.01);
+            let colour = lerpColor(palette.light, palette.white, perlin);
+            perlinLayer.set(i, j, colour);
+        }
+    }
+
+    perlinLayer.updatePixels();
 
     fabric = new Fabric();
 }

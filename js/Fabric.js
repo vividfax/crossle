@@ -20,7 +20,7 @@ class Fabric {
         this.pattern = new Pattern(6, 6, this.spacing);
 
         this.fromColour = palette.dark;
-        this.toColour = palette.light;
+        this.toColour = palette.mid;
         this.shadowColour = lerpColor(this.fromColour, this.toColour, 0.5);
     }
 
@@ -79,6 +79,16 @@ class Fabric {
 
         fabricLayer.background(255);
         if (this.complete()) fabricLayer.background(palette.white);
+        
+        if (this.complete()) {
+            if (frontSide) {
+                fabricLayer.image(perlinLayer, 0, 0);
+            } else {
+                fabricLayer.scale(-1, 1);
+                fabricLayer.image(perlinLayer, -width, 0);
+                fabricLayer.scale(-1, 1);
+            }
+        }
 
         if (frontSide) this.pattern.display();
 

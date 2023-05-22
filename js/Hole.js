@@ -23,8 +23,10 @@ class Hole {
 
         fabricLayer.noStroke();
         fabricLayer.fill(210);
-        if (fabric.complete()) fabricLayer.fill(0, 40);
+        palette.dark.setAlpha(10);
+        if (fabric.complete()) fabricLayer.fill(palette.dark);
         fabricLayer.rectMode(CENTER);
         fabricLayer.rect(this.x, this.y, this.radius, this.radius);
+        palette.dark.setAlpha(100);
     }
 }
