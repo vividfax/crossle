@@ -30,7 +30,6 @@ function setup() {
     
     fabricLayer = createGraphics(size, size);
     exportLayer = createGraphics(size*2+30, size+20);
-    fabricLayer.textFont(scoreFont);
 
     saveImageButton = select("#save-image");
     let buttonY = size/2+20;
@@ -89,6 +88,7 @@ function displayUI(cnvs) {
     cnvs.fill("#12263A");
     cnvs.textSize(width/10);
     cnvs.textAlign(LEFT, TOP);
+    cnvs.textFont(scoreFont);
 
     if (frontVisible || cnvs == exportLayer) {
         cnvs.text(fabric.getFlossUsed(), width/30, width/150);
