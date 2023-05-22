@@ -63,11 +63,7 @@ function newGame() {
 
 function mousePressed() {
 
-    if (mouseButton == LEFT) {
-        fabric.sew();
-    } else if (mouseButton == RIGHT) {
-        // frontVisible = !frontVisible;
-    }
+    fabric.sew();
 }
 
 function displayUI(cnvs) {
