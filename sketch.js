@@ -63,7 +63,6 @@ function setup() {
     if (month < 10) month = "0"+month;
     let seed = day+""+month+""+d.getFullYear();
     let hash = hashCode(seed);
-    console.log(hash);
 
     randomSeed(hash);
     // noiseSeed(seed);
