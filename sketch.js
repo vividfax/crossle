@@ -7,6 +7,14 @@ let fabricLayer;
 let exportLayer;
 
 let saveImageButton;
+let resetButton;
+
+let scoreFont;
+
+function preload() {
+
+    scoreFont = loadFont("./fonts/Nunito-SemiBold.ttf");
+}
 
 function setup() {
 
@@ -19,14 +27,20 @@ function setup() {
     }
 
     myCanvas = createCanvas(size, size);
-
+    
     fabricLayer = createGraphics(size, size);
     exportLayer = createGraphics(size*2+30, size+20);
+    fabricLayer.textFont(scoreFont);
 
     saveImageButton = select("#save-image");
     let buttonY = size/2+20;
     saveImageButton.style("transform", "translate(-50%, "+buttonY+"px)")
     saveImageButton.mousePressed(saveImage);
+
+    resetButton = select("#reset");
+    buttonY = -size/2-20-40;
+    resetButton.style("transform", "translate(-50%, "+buttonY+"px)")
+    resetButton.mousePressed(reset);
 
     let d = new Date();
     let day = d.getDate();
@@ -51,6 +65,9 @@ function draw() {
     saveImageButton.style("display", "none");
     if (fabric.complete()) displayUI(fabricLayer);
 
+    resetButton.style("display", "none");
+    if (fabric.complete()) resetButton.style("display", "inline");
+
     image(fabricLayer, 0, 0);
 }
 
@@ -68,15 +85,16 @@ function displayUI(cnvs) {
 
     cnvs.push();
     cnvs.noStroke();
+    cnvs.strokeJoin(ROUND);
     cnvs.fill("#12263A");
     cnvs.textSize(width/10);
     cnvs.textAlign(LEFT, TOP);
 
     if (frontVisible || cnvs == exportLayer) {
-        cnvs.text(fabric.getFlossUsed(), width/30, width/30-width/100);
+        cnvs.text(fabric.getFlossUsed(), width/30, width/150);
     } else {
         cnvs.scale(-1, 1);
-        cnvs.text(fabric.getFlossUsed(), width/30-width, width/30);
+        cnvs.text(fabric.getFlossUsed(), width/30-width, width/150);
     }
 
     cnvs.pop();
@@ -100,4 +118,9 @@ function saveImage() {
     exportLayer.pop();
 
     save(exportLayer, "crossle", "png");
+}
+
+function reset() {
+
+    fabric.path = [];
 }

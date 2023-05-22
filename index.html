@@ -16,6 +16,14 @@
     <script src="./js/Pattern.js"></script>
 
     <style>
+        
+        @font-face {
+            font-family: "Nunito";
+            src: url("./fonts/Nunito-SemiBold.ttf");
+            font-weight: normal;
+            font-style: normal;
+        }        
+
         body {
             margin: 0;
             padding: 0;
@@ -38,13 +46,14 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
+            width: 180px;
             height: 40px;
             border-radius: 5px;
             border-style: none;
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #222;
             background-color: #fff4f4;
+            font-family: "Nunito", sans-serif;
         }
 
         button:hover {
@@ -56,6 +65,7 @@
 
 <body>
 
+    <button id="reset">Reset</button>
     <button id="save-image">Save image</button>
 
 </body>
