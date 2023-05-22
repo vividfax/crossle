@@ -83,7 +83,7 @@ function draw() {
 function newGame() {
 
     palette = {
-        white: color(random(100), random(5, 10), 80),
+        white: color(random(100), random(0, 10), random(80, 100)),
         light: color(random(100), 80, 100),
         dark: color(random(100), 100, 30),
     }
