@@ -5,6 +5,8 @@ let frontVisible = true;
 
 function setup() {
 
+    document.addEventListener('touchstart', {});
+
     createCanvas(200, 200);
 
     let d = new Date();
