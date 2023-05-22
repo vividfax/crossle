@@ -6,7 +6,7 @@ class Hole {
         this.x = x;
         this.y = y;
 
-        this.radius = width/25;
+        this.radius = width/30;
     }
 
     update() {
