@@ -60,7 +60,7 @@ function setup() {
 
     let startDate = new Date("05/22/2023");
     let todayDate = new Date();
-    let difference = startDate.getTime()-todayDate.getTime();
+    let difference = todayDate.getTime()-startDate.getTime();
     puzzleNumber = int(difference/(1000*60*60*24));
 
     randomSeed(seed);
