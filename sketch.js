@@ -64,7 +64,7 @@ function setup() {
     puzzleNumber = int(difference/(1000*60*60*24));
 
     randomSeed(seed);
-    noiseSeed(seed);
+    // noiseSeed(seed);
 
     newGame();
 }
@@ -90,14 +90,14 @@ function newGame() {
 
     palette = {
         white: color(random(100), random(0, 10), random(80, 100)),
-        light: color(random(100), random(20, 40), random(80, 100)),
+        light: color(random(100), random(40, 60), random(60, 100)),
         mid: color(random(100), 100, 90),
         dark: color(random(100), 100, 30),
     }
 
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
-            let perlin = noise(i/width*1.5, j/width*1.5);
+            let perlin = noise(i/width*2.5, j/width*2.5);
             let colour = lerpColor(palette.light, palette.white, perlin);
             perlinLayer.set(i, j, colour);
         }
