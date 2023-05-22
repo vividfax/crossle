@@ -60,8 +60,8 @@ function setup() {
     let difference = startDate.getTime()-todayDate.getTime();
     puzzleNumber = int(difference/(1000*60*60*24));
 
-    // randomSeed(seed);
-    // noiseSeed(seed);
+    randomSeed(seed);
+    noiseSeed(seed);
 
     newGame();
 }
