@@ -31,17 +31,19 @@ class Pattern {
         fabricLayer.translate(this.left, this.top);
         fabricLayer.translate(this.spacing/2, this.spacing/2);
 
-        fabricLayer.fill(230);
+        palette.dark.setAlpha(20);
+        fabricLayer.fill(palette.dark);
         fabricLayer.noStroke();
 
         let index = 0;
         for (let i = 0; i < this.w; i++) {
             for (let j = 0; j < this.h; j++) {
-                if (this.pattern[index]) fabricLayer.rect(i*this.spacing, j*this.spacing+1, this.spacing+1);
+                if (this.pattern[index]) fabricLayer.rect(i*this.spacing, j*this.spacing, this.spacing);
                 index++;
             }
         }
 
+        palette.dark.setAlpha(100);
         fabricLayer.pop();
     }
 }
