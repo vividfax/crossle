@@ -27,7 +27,7 @@ function setup() {
 
     document.addEventListener('touchstart', {});
 
-    let size = 200;
+    let size = 300;
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         size = displayWidth < displayHeight ? displayWidth : displayHeight;
