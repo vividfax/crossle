@@ -51,19 +51,21 @@ function setup() {
     resetButton.style("transform", "translate(-50%, "+buttonY+"px)")
     resetButton.mousePressed(reset);
 
+    let startDate = new Date("05/22/2023");
+    let todayDate = new Date();
+    let difference = todayDate.getTime()-startDate.getTime();
+    puzzleNumber = int(difference/(1000*60*60*24));
+
     let d = new Date();
     let day = d.getDate();
     if (day < 10) day = "0"+day;
     let month = d.getMonth();
     if (month < 10) month = "0"+month;
     let seed = day+""+month+""+d.getFullYear();
+    let hash = hashCode(seed);
+    console.log(hash);
 
-    let startDate = new Date("05/22/2023");
-    let todayDate = new Date();
-    let difference = todayDate.getTime()-startDate.getTime();
-    puzzleNumber = int(difference/(1000*60*60*24));
-
-    randomSeed(seed);
+    randomSeed(hash);
     // noiseSeed(seed);
 
     newGame();
@@ -87,6 +89,8 @@ function draw() {
 }
 
 function newGame() {
+
+    let burnRandom = random();
 
     palette = {
         white: color(random(100), random(0, 10), random(80, 100)),
@@ -167,4 +171,14 @@ function saveImage() {
 function reset() {
 
     fabric.path = [];
+}
+
+function hashCode(str) {
+    let hash = 0;
+    for (let i = 0, len = str.length; i < len; i++) {
+        let chr = str.charCodeAt(i);
+        hash = (hash << 5) - hash + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
 }
