@@ -100,7 +100,7 @@ class Fabric {
                 if (this.complete()) fabricLayer.stroke(lerpColor(this.fromColour, this.toColour, i/this.path.length));
                 fabricLayer.line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
             }
-            if (this.path.length%2 == 1 & this.hoverStitch != -1) {
+            if (this.path.length%2 == 1 & this.hoverStitch != -1 && !this.complete()) {
                 fabricLayer.stroke(100);
                 fabricLayer.strokeWeight(width/20);
                 fabricLayer.line(this.holes[this.path[this.path.length-1]].x, this.holes[this.path[this.path.length-1]].y, this.holes[this.hoverStitch].x, this.holes[this.hoverStitch].y);
