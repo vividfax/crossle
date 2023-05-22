@@ -1,12 +1,13 @@
 class Hole {
 
-    constructor(index, x, y) {
+    constructor(index, x, y, spacing) {
 
         this.index = index;
         this.x = x;
         this.y = y;
 
         this.radius = width/30;
+        this.spacing = spacing;
     }
 
     update() {
@@ -15,7 +16,7 @@ class Hole {
 
     hover() {
 
-        if (dist(this.x, this.y, mouseX, mouseY) < this.radius) return true;
+        if (dist(this.x, this.y, mouseX, mouseY) < this.spacing/2) return true;
     }
 
     display() {

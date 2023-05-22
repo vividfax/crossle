@@ -12,7 +12,7 @@ class Fabric {
         for (let i = padding; i <= width-padding/2; i += this.spacing) {
             for (let j = padding; j <= height-padding; j += this.spacing) {
 
-                this.holes.push(new Hole(index, i, j));
+                this.holes.push(new Hole(index, i, j, this.spacing));
                 index++;
             }
         }
