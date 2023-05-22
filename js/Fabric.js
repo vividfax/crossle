@@ -67,7 +67,7 @@ class Fabric {
             distance += dist(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
         }
 
-        return int(distance/this.spacing*10)/10;
+        return int(distance/this.spacing*2*10)/10;
     }
 
     complete() {
