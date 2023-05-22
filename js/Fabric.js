@@ -58,6 +58,11 @@ class Fabric {
         return int(distance/this.spacing*100)/100;
     }
 
+    complete() {
+
+        if (this.path.length > 1 && this.path[0] == this.path[this.path.length-1]) return true;
+    }
+
     finish() {
 
     }
@@ -85,10 +90,10 @@ class Fabric {
                 line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
                 stroke(150);
                 strokeWeight(6);
-                if (i == this.path.length-2 && !this.path[0] != this.path[this.path.length-1]) stroke(255);
+                if (i == this.path.length-2 && !this.complete()) stroke(255);
                 line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
             }
-            if (this.path.length == 1 || this.path[0] != this.path[this.path.length-1]) {
+            if (this.path.length == 1 || !this.complete()) {
                 stroke(100);
                 strokeWeight(2);
                 fill(150);
@@ -103,10 +108,10 @@ class Fabric {
                 line(width-this.holes[this.path[i]].x, this.holes[this.path[i]].y, width-this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
                 stroke(150);
                 strokeWeight(6);
-                if (i == this.path.length-2 && this.path[0] != this.path[this.path.length-1]) stroke(255);
+                if (i == this.path.length-2 && !this.complete()) stroke(255);
                 line(width-this.holes[this.path[i]].x, this.holes[this.path[i]].y, width-this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
             }
-            if (this.path.length == 1 || this.path[0] != this.path[this.path.length-1]) {
+            if (this.path.length == 1 || !this.complete()) {
                 stroke(100);
                 strokeWeight(2);
                 fill(150);

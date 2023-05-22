@@ -29,7 +29,7 @@ function draw() {
     fabric.update();
     fabric.display();
 
-    displayUI();
+    if (fabric.complete()) displayUI();
 }
 
 function newGame() {
