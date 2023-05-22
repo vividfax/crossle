@@ -102,21 +102,21 @@ function displayUI(cnvs, frontSide) {
     cnvs.noStroke();
     cnvs.strokeJoin(ROUND);
     cnvs.fill(palette.dark);
-    cnvs.textSize(width/10);
+    cnvs.textSize(width/13);
     cnvs.textAlign(LEFT, TOP);
     cnvs.textFont(scoreFont);
 
     if (frontSide) {
-        cnvs.text("CROSSLE #"+puzzleNumber, width/30, width/150);
+        cnvs.text("CROSSLE #"+puzzleNumber, width/30, width/50);
         cnvs.textAlign(RIGHT, BOTTOM);
-        cnvs.text(fabric.getFlossUsed()+" mm", width-width/30, width-width/150);
+        cnvs.text(fabric.getFlossUsed()+" mm", width-width/30, width-width/50);
     } else {
         palette.dark.setAlpha(50);
         cnvs.fill(palette.dark);
         cnvs.scale(-1, 1);
-        cnvs.text("CROSSLE #"+puzzleNumber, width/30-width, width/150);
+        cnvs.text("CROSSLE #"+puzzleNumber, width/30-width, width/50);
         cnvs.textAlign(RIGHT, BOTTOM);
-        cnvs.text(fabric.getFlossUsed()+" mm", width-width/30-width, width-width/150);
+        cnvs.text(fabric.getFlossUsed()+" mm", width-width/30-width, width-width/50);
         palette.dark.setAlpha(100);
     }
 
