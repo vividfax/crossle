@@ -17,6 +17,10 @@ class Fabric {
         }
 
         this.pattern = new Pattern(6, 6, this.spacing);
+
+        this.fromColour = color("#12263A");
+        this.toColour = color("#06BCC1");
+        this.shadowColour = lerpColor(this.fromColour, this.toColour, 0.5);
     }
 
     update() {
@@ -66,6 +70,7 @@ class Fabric {
     display(frontSide) {
 
         fabricLayer.background(255);
+        if (this.complete()) fabricLayer.background("#C5D8D1");
 
         if (frontSide) this.pattern.display();
 
@@ -73,22 +78,18 @@ class Fabric {
             this.holes[i].display();
         }
 
-        fabricLayer.stroke(150);
-        fabricLayer.strokeWeight(3);
-
         if (this.path.length == 0) return;
 
         if (frontSide) {
-
-            fabricLayer.stroke(100);
-            fabricLayer.strokeWeight(6);
             for (let i = 0; i < this.path.length-1; i += 2) {
                 fabricLayer.stroke(100);
                 fabricLayer.strokeWeight(width/20);
+                if (this.complete()) fabricLayer.stroke(this.shadowColour);
                 fabricLayer.line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
                 fabricLayer.stroke(150);
                 fabricLayer.strokeWeight(width/20-width/75);
                 if (i == this.path.length-2 && !this.complete()) fabricLayer.stroke(255);
+                if (this.complete()) fabricLayer.stroke(lerpColor(this.fromColour, this.toColour, i/this.path.length));
                 fabricLayer.line(this.holes[this.path[i]].x, this.holes[this.path[i]].y, this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
             }
             if (this.path.length == 1 || !this.complete()) {
@@ -103,10 +104,12 @@ class Fabric {
             for (let i = 1; i < this.path.length-1; i += 2) {
                 fabricLayer.stroke(100);
                 fabricLayer.strokeWeight(width/20);
+                if (this.complete()) fabricLayer.stroke(this.shadowColour);
                 fabricLayer.line(width-this.holes[this.path[i]].x, this.holes[this.path[i]].y, width-this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
                 fabricLayer.stroke(150);
                 fabricLayer.strokeWeight(width/20-width/75);
                 if (i == this.path.length-2 && !this.complete()) fabricLayer.stroke(255);
+                if (this.complete()) fabricLayer.stroke(lerpColor(this.fromColour, this.toColour, i/this.path.length));
                 fabricLayer.line(width-this.holes[this.path[i]].x, this.holes[this.path[i]].y, width-this.holes[this.path[i+1]].x, this.holes[this.path[i+1]].y);
             }
             if (this.path.length == 1 || !this.complete()) {

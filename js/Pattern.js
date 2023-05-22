@@ -22,6 +22,8 @@ class Pattern {
 
     display() {
 
+        if (fabric.complete()) return;
+
         fabricLayer.push();
         fabricLayer.translate(this.left, this.top);
         fabricLayer.translate(this.spacing/2, this.spacing/2);

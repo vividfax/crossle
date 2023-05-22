@@ -38,21 +38,22 @@ function setup() {
     randomSeed(seed);
 
     newGame();
-    draw();
 }
 
 function draw() {
 
-    if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) frontVisible = false;
-    else frontVisible = true;
+    // if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) frontVisible = false;
+    // else frontVisible = true;
+
+    console.log(frontVisible);
 
     fabric.update();
-    fabric.display(frontVisible);
-
-    image(fabricLayer, 0, 0);
+    fabric.display(true);
 
     saveImageButton.style("display", "none");
-    if (fabric.complete()) displayUI(myCanvas);
+    if (fabric.complete()) displayUI(fabricLayer);
+
+    image(fabricLayer, 0, 0);
 }
 
 function newGame() {
@@ -62,13 +63,17 @@ function newGame() {
 
 function mousePressed() {
 
-    fabric.sew();
+    if (mouseButton == LEFT) {
+        fabric.sew();
+    } else if (mouseButton == RIGHT) {
+        // frontVisible = !frontVisible;
+    }
 }
 
 function displayUI(cnvs) {
 
-    cnvs.strokeWeight(0);
-    cnvs.fill(100);
+    cnvs.noStroke();
+    cnvs.fill("#12263A");
     cnvs.textSize(width/10);
     cnvs.textAlign(LEFT, TOP);
 
