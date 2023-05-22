@@ -84,8 +84,9 @@ function displayUI(cnvs) {
 
 function saveImage() {
 
-    exportLayer.clear();
     exportLayer.background("#333");
+
+    exportLayer.push();
 
     exportLayer.translate(10, 10);
     fabric.display(true);
@@ -93,6 +94,8 @@ function saveImage() {
     displayUI(exportLayer);
     fabric.display(false);
     exportLayer.image(fabricLayer, width+10, 0);
+
+    exportLayer.pop();
 
     save(exportLayer, "crossle", "png");
 }
