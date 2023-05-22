@@ -79,7 +79,7 @@ class Fabric {
 
         fabricLayer.background(255);
         if (this.complete()) fabricLayer.background(palette.white);
-        
+
         // if (new Date().getDay() == 0 && this.complete()) {
         if (this.complete()) {
             if (frontSide) {

@@ -36,7 +36,7 @@ function setup() {
 
     myCanvas = createCanvas(size, size);
     colorMode(HSB, 100);
-    
+
     fabricLayer = createGraphics(size, size);
     perlinLayer = createGraphics(size, size);
     exportLayer = createGraphics(size*2+(width/30)*3, size+(width/30)*2);
@@ -124,14 +124,14 @@ function displayUI(cnvs, frontSide) {
     cnvs.textFont(scoreFont);
 
     if (frontSide) {
-        cnvs.text("CROSSLE #"+puzzleNumber, width/30, width/50);
+        cnvs.text("Crossle #"+puzzleNumber, width/30, width/50);
         cnvs.textAlign(RIGHT, BOTTOM);
         cnvs.text(fabric.getFlossUsed()+" mm", width-width/30, width-width/50);
     } else {
         palette.dark.setAlpha(50);
         cnvs.fill(palette.dark);
         cnvs.scale(-1, 1);
-        cnvs.text("CROSSLE #"+puzzleNumber, width/30-width, width/50);
+        cnvs.text("Crossle #"+puzzleNumber, width/30-width, width/50);
         cnvs.textAlign(RIGHT, BOTTOM);
         cnvs.text(fabric.getFlossUsed()+" mm", width-width/30-width, width-width/50);
         palette.dark.setAlpha(100);
