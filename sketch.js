@@ -42,13 +42,11 @@ function setup() {
 
 function draw() {
 
-    // if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) frontVisible = false;
-    // else frontVisible = true;
-
-    console.log(frontVisible);
+    if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) frontVisible = false;
+    else frontVisible = true;
 
     fabric.update();
-    fabric.display(true);
+    fabric.display(frontVisible);
 
     saveImageButton.style("display", "none");
     if (fabric.complete()) displayUI(fabricLayer);
@@ -68,6 +66,7 @@ function mousePressed() {
 
 function displayUI(cnvs) {
 
+    cnvs.push();
     cnvs.noStroke();
     cnvs.fill("#12263A");
     cnvs.textSize(width/10);
@@ -79,6 +78,8 @@ function displayUI(cnvs) {
         cnvs.scale(-1, 1);
         cnvs.text(fabric.getFlossUsed(), width/30-width, width/30);
     }
+
+    cnvs.pop();
 
     saveImageButton.style("display", "inline");
 }
