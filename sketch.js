@@ -2,6 +2,12 @@ let fabric;
 
 let frontVisible = true;
 
+let myCanvas;
+let fabricLayer;
+let exportLayer;
+
+let saveImageButton;
+
 function setup() {
 
     document.addEventListener('touchstart', {});
@@ -12,7 +18,15 @@ function setup() {
         size = displayWidth < displayHeight ? displayWidth : displayHeight;
     }
 
-    createCanvas(size, size);
+    myCanvas = createCanvas(size, size);
+
+    fabricLayer = createGraphics(size, size);
+    exportLayer = createGraphics(size*2+30, size+20);
+
+    saveImageButton = select("#save-image");
+    let buttonY = size/2+20;
+    saveImageButton.style("transform", "translate(-50%, "+buttonY+"px)")
+    saveImageButton.mousePressed(saveImage);
 
     let d = new Date();
     let day = d.getDate();
@@ -24,19 +38,21 @@ function setup() {
     randomSeed(seed);
 
     newGame();
+    draw();
 }
 
 function draw() {
-
-    background(255);
 
     if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) frontVisible = false;
     else frontVisible = true;
 
     fabric.update();
-    fabric.display();
+    fabric.display(frontVisible);
 
-    if (fabric.complete()) displayUI();
+    image(fabricLayer, 0, 0);
+
+    saveImageButton.style("display", "none");
+    if (fabric.complete()) displayUI(myCanvas);
 }
 
 function newGame() {
@@ -49,17 +65,34 @@ function mousePressed() {
     fabric.sew();
 }
 
-function displayUI() {
+function displayUI(cnvs) {
 
-    noStroke();
-    fill(100);
-    textSize(width/10);
-    textAlign(LEFT, TOP);
+    cnvs.strokeWeight(0);
+    cnvs.fill(100);
+    cnvs.textSize(width/10);
+    cnvs.textAlign(LEFT, TOP);
 
-    if (frontVisible) {
-        text(fabric.getFlossUsed(), width/30, width/30);
+    if (frontVisible || cnvs == exportLayer) {
+        cnvs.text(fabric.getFlossUsed(), width/30, width/30-width/100);
     } else {
-        scale(-1, 1);
-        text(fabric.getFlossUsed(), width/30-width, width/30);
+        cnvs.scale(-1, 1);
+        cnvs.text(fabric.getFlossUsed(), width/30-width, width/30);
     }
+
+    saveImageButton.style("display", "inline");
+}
+
+function saveImage() {
+
+    exportLayer.clear();
+    exportLayer.background("#333");
+
+    exportLayer.translate(10, 10);
+    fabric.display(true);
+    exportLayer.image(fabricLayer, 0, 0);
+    displayUI(exportLayer);
+    fabric.display(false);
+    exportLayer.image(fabricLayer, width+10, 0);
+
+    save(exportLayer, "crossle", "png");
 }

@@ -20,9 +20,9 @@ class Hole {
 
     display() {
 
-        noStroke();
-        fill(210);
-        rectMode(CENTER);
-        rect(this.x, this.y, this.radius, this.radius);
+        fabricLayer.noStroke();
+        fabricLayer.fill(210);
+        fabricLayer.rectMode(CENTER);
+        fabricLayer.rect(this.x, this.y, this.radius, this.radius);
     }
 }

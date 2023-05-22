@@ -22,21 +22,21 @@ class Pattern {
 
     display() {
 
-        push();
-        translate(this.left, this.top);
-        translate(this.spacing/2, this.spacing/2);
+        fabricLayer.push();
+        fabricLayer.translate(this.left, this.top);
+        fabricLayer.translate(this.spacing/2, this.spacing/2);
 
-        fill(230);
-        noStroke();
+        fabricLayer.fill(230);
+        fabricLayer.noStroke();
 
         let index = 0;
         for (let i = 0; i < this.w; i++) {
             for (let j = 0; j < this.h; j++) {
-                if (this.pattern[index]) rect(i*this.spacing, j*this.spacing+1, this.spacing+1);
+                if (this.pattern[index]) fabricLayer.rect(i*this.spacing, j*this.spacing+1, this.spacing+1);
                 index++;
             }
         }
 
-        pop();
+        fabricLayer.pop();
     }
 }
