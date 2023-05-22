@@ -39,7 +39,7 @@ function setup() {
     
     fabricLayer = createGraphics(size, size);
     perlinLayer = createGraphics(size, size);
-    exportLayer = createGraphics(size*2+30, size+20);
+    exportLayer = createGraphics(size*2+(width/30)*3, size+(width/30)*2);
 
     saveImageButton = select("#save-image");
     let buttonY = size/2+20;
@@ -148,11 +148,11 @@ function saveImage() {
 
     exportLayer.push();
 
-    exportLayer.translate(10, 10);
+    exportLayer.translate((width/30), (width/30));
     fabric.display(true);
     exportLayer.image(fabricLayer, 0, 0);
     displayUI(exportLayer, true);
-    exportLayer.translate(width+10, 0);
+    exportLayer.translate(width+(width/30), 0);
     fabric.display(false);
     exportLayer.image(fabricLayer, 0, 0);
     displayUI(exportLayer, false);
