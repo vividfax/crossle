@@ -16,6 +16,8 @@ let palette;
 
 let puzzleNumber;
 
+let mobile = false;
+
 function preload() {
 
     scoreFont = loadFont("./fonts/Nunito-SemiBold.ttf");
@@ -29,6 +31,7 @@ function setup() {
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         size = displayWidth < displayHeight ? displayWidth : displayHeight;
+        mobile = true;
     }
 
     myCanvas = createCanvas(size, size);
