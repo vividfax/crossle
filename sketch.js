@@ -18,6 +18,8 @@ let puzzleNumber;
 let size = 300;
 let mobile = false;
 
+let interacted = false;
+
 function preload() {
 
     scoreFont = loadFont("./fonts/Nunito-SemiBold.ttf");
@@ -80,8 +82,12 @@ function draw() {
     push();
     translate(width/2-size/2, height/2-size/2);
 
-    if (mouseX < width/2-size/2 || mouseX > width/2+size/2 || mouseY < height/2-size/2 || mouseY > height/2+size/2) frontVisible = false;
+    if (interacted &&( mouseX < width/2-size/2 || mouseX > width/2+size/2 || mouseY < height/2-size/2 || mouseY > height/2+size/2)) frontVisible = false;
     else frontVisible = true;
+
+    if (document.querySelector('button:hover')) {
+        frontVisible = true;
+    }
 
     fabric.update();
     fabric.display(frontVisible);
@@ -123,6 +129,8 @@ function newGame() {
 }
 
 function mousePressed() {
+
+    if (!interacted) interacted = true;
 
     fabric.sew();
 
