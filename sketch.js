@@ -132,6 +132,8 @@ function mousePressed() {
 
     if (!interacted) interacted = true;
 
+    if (!frontVisible) return;
+
     fabric.sew();
 
     if (fabric.complete()) {
