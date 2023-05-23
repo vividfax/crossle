@@ -5,7 +5,6 @@ let frontVisible = true;
 let myCanvas;
 let fabricLayer;
 let perlinLayer;
-let exportLayer;
 
 let saveImageButton;
 let resetButton;
@@ -16,6 +15,7 @@ let palette;
 
 let puzzleNumber;
 
+let size = 300;
 let mobile = false;
 
 function preload() {
@@ -27,19 +27,18 @@ function setup() {
 
     document.addEventListener('touchstart', {});
 
-    let size = 300;
+    size = 300;
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         size = displayWidth < displayHeight ? displayWidth : displayHeight;
         mobile = true;
     }
 
-    myCanvas = createCanvas(size, size);
+    myCanvas = createCanvas(size*2+(size/30)*3, size+(size/30)*2);
     colorMode(HSB, 100);
 
     fabricLayer = createGraphics(size, size);
     perlinLayer = createGraphics(size, size);
-    exportLayer = createGraphics(size*2+(width/30)*3, size+(width/30)*2);
 
     saveImageButton = select("#save-image");
     let buttonY = size/2+20;
@@ -62,45 +61,55 @@ function setup() {
     let month = d.getMonth();
     if (month < 10) month = "0"+month;
     let seed = day+""+month+""+d.getFullYear();
+    // seed = "22042023";
     let hash = hashCode(seed);
 
     randomSeed(hash);
     // noiseSeed(seed);
 
     newGame();
+
+    if (puzzleNumber == getItem("puzzleNumber")) {
+        fabric.path = getItem("path");
+    }
 }
 
 function draw() {
 
-    if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) frontVisible = false;
+    background(palette.black);
+    push();
+    translate(width/2-size/2, height/2-size/2);
+
+    if (mouseX < width/2-size/2 || mouseX > width/2+size/2 || mouseY < height/2-size/2 || mouseY > height/2+size/2) frontVisible = false;
     else frontVisible = true;
 
     fabric.update();
     fabric.display(frontVisible);
 
+    image(fabricLayer, 0, 0, size, size);
+
     saveImageButton.style("display", "none");
-    if (fabric.complete()) displayUI(fabricLayer, frontVisible);
+    if (fabric.complete()) displayUI(frontVisible);
 
     resetButton.style("display", "none");
     if (fabric.complete()) resetButton.style("display", "inline");
 
-    image(fabricLayer, 0, 0);
+    pop();
 }
 
 function newGame() {
-
-    let burnRandom = random();
 
     palette = {
         white: color(random(100), random(0, 10), random(80, 100)),
         light: color(random(100), random(40, 60), random(60, 100)),
         mid: color(random(100), 100, 90),
         dark: color(random(100), 100, 30),
+        black: color("#322932"),
     }
 
-    for (let i = 0; i < width; i++) {
-        for (let j = 0; j < height; j++) {
-            let perlin = noise(i/width*2.5, j/width*2.5);
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            let perlin = noise(i/size*2.5, j/size*2.5);
             let colour = lerpColor(palette.light, palette.white, perlin);
             perlinLayer.set(i, j, colour);
         }
@@ -116,60 +125,73 @@ function newGame() {
 function mousePressed() {
 
     fabric.sew();
+
+    if (fabric.complete()) {
+        storeItem("puzzleNumber", puzzleNumber);
+        storeItem("path", fabric.path);
+    }
 }
 
-function displayUI(cnvs, frontSide) {
+function displayUI(frontSide) {
 
-    cnvs.push();
-    cnvs.noStroke();
-    cnvs.strokeJoin(ROUND);
-    cnvs.fill(palette.dark);
-    cnvs.textSize(width/13);
-    cnvs.textAlign(LEFT, TOP);
-    cnvs.textFont(scoreFont);
+    push();
+    noStroke();
+    strokeJoin(ROUND);
+    fill(palette.dark);
+    textSize(size/13);
+    textAlign(LEFT, TOP);
+    textFont(scoreFont);
 
     if (frontSide) {
-        cnvs.text("Crossle #"+puzzleNumber, width/30, width/50);
-        cnvs.textAlign(RIGHT, BOTTOM);
-        cnvs.text(fabric.getFlossUsed()+" mm", width-width/30, width-width/50);
+        text("Crossle #"+puzzleNumber, size/30, size/50);
+        textAlign(RIGHT, BOTTOM);
+        text(fabric.getFlossUsed()+" mm", size-size/30, size-size/50);
     } else {
         palette.dark.setAlpha(50);
-        cnvs.fill(palette.dark);
-        cnvs.scale(-1, 1);
-        cnvs.text("Crossle #"+puzzleNumber, width/30-width, width/50);
-        cnvs.textAlign(RIGHT, BOTTOM);
-        cnvs.text(fabric.getFlossUsed()+" mm", width-width/30-width, width-width/50);
+        fill(palette.dark);
+        scale(-1, 1);
+        text("Crossle #"+puzzleNumber, size/30-size, size/50);
+        textAlign(RIGHT, BOTTOM);
+        text(fabric.getFlossUsed()+" mm", size-size/30-size, size-size/50);
         palette.dark.setAlpha(100);
     }
 
-    cnvs.pop();
+    pop();
 
     saveImageButton.style("display", "inline");
 }
 
 function saveImage() {
 
-    exportLayer.background("#322932");
+    background(palette.black);
 
-    exportLayer.push();
+    push();
 
-    exportLayer.translate((width/30), (width/30));
+    translate((size/30), (size/30));
     fabric.display(true);
-    exportLayer.image(fabricLayer, 0, 0);
-    displayUI(exportLayer, true);
-    exportLayer.translate(width+(width/30), 0);
+    image(fabricLayer, 0, 0);
+    displayUI(true);
+    translate(size+(size/30), 0);
     fabric.display(false);
-    exportLayer.image(fabricLayer, 0, 0);
-    displayUI(exportLayer, false);
+    image(fabricLayer, 0, 0);
+    displayUI(false);
 
-    exportLayer.pop();
-
-    save(exportLayer, "crossle", "png");
+    pop();
+    
+    if (mobile) {
+        saveCanvas(canvas, "crossle", "png");
+    } else {
+        let dataUrl = canvas.toDataURL("png");
+        window.location.href = dataUrl;
+    }
 }
 
 function reset() {
 
     fabric.path = [];
+
+    storeItem("puzzleNumber", puzzleNumber);
+    storeItem("path", []);
 }
 
 function hashCode(str) {

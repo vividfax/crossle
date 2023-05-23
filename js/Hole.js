@@ -6,7 +6,7 @@ class Hole {
         this.x = x;
         this.y = y;
 
-        this.radius = width/30;
+        this.radius = size/30;
         this.spacing = spacing;
     }
 
@@ -16,7 +16,7 @@ class Hole {
 
     hover() {
 
-        if (dist(this.x, this.y, mouseX, mouseY) < this.spacing/2) return true;
+        if (dist(this.x, this.y, mouseX-width/2+size/2, mouseY-height/2+size/2) < this.spacing/2) return true;
     }
 
     display() {
@@ -24,7 +24,7 @@ class Hole {
         fabricLayer.noStroke();
         palette.dark.setAlpha(15);
         fabricLayer.fill(palette.dark);
-        fabricLayer.rect(this.x-width/300, this.y-width/300, this.radius, this.radius);
+        fabricLayer.rect(this.x-size/300, this.y-size/300, this.radius, this.radius);
         fabricLayer.fill(255);
         fabricLayer.rect(this.x, this.y, this.radius, this.radius);
         palette.dark.setAlpha(35);

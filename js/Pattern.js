@@ -6,8 +6,8 @@ class Pattern {
         this.h = h;
         this.spacing = spacing;
 
-        this.left = width/2 - this.w*spacing/2;
-        this.top = height/2 - this.h*spacing/2;
+        this.left = size/2 - this.w*spacing/2;
+        this.top = size/2 - this.h*spacing/2;
 
         this.pattern = [];
 
