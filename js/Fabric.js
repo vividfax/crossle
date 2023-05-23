@@ -52,7 +52,9 @@ class Fabric {
 
         let oldHoleIndex = this.path[this.path.length-1];
 
-        if (newHoleIndex == oldHoleIndex) {
+        if (this.complete() && newHoleIndex != oldHoleIndex) {
+            // do nothing
+        } else if (newHoleIndex == oldHoleIndex) {
             this.path.pop();
         } else {
             this.path.push(newHoleIndex);
