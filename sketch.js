@@ -80,7 +80,7 @@ function setup() {
     myNoiseSeed = int(random(123456789))
     randomSeed(hash);
     if (puzzleNumber == getItem("puzzleNumber")) {
-        myNoiseSeed = getItem("noiseSeed");
+        if (getItem("noiseSeed") != null) myNoiseSeed = getItem("noiseSeed");
     }
     noiseSeed(myNoiseSeed);
 
@@ -225,9 +225,9 @@ function seeBack() {
     frontVisible = !frontVisible;
 
     if (frontVisible) {
-        seeBackButton.html("See back");
+        seeBackButton.html("View back");
     } else {
-        seeBackButton.html("See front");
+        seeBackButton.html("View front");
     }
 }
 

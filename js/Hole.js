@@ -22,15 +22,18 @@ class Hole {
     display() {
 
         fabricLayer.noStroke();
-        palette.dark.setAlpha(15);
-        fabricLayer.fill(palette.dark);
-        fabricLayer.rect(this.x-size/300, this.y-size/300, this.radius, this.radius);
+        fabricLayer.rectMode(CENTER);
+        // palette.dark.setAlpha(15);
+        // fabricLayer.fill(palette.dark);
+        // fabricLayer.rect(this.x-size/300, this.y-size/300, this.radius, this.radius);
         fabricLayer.fill(255);
         fabricLayer.rect(this.x, this.y, this.radius, this.radius);
-        palette.dark.setAlpha(35);
-        fabricLayer.fill(palette.dark);
-        fabricLayer.rectMode(CENTER);
+        palette.black.setAlpha(70);
+        fabricLayer.fill(palette.black);
         fabricLayer.rect(this.x, this.y, this.radius, this.radius);
-        palette.dark.setAlpha(100);
+        // palette.dark.setAlpha(35);
+        // fabricLayer.fill(palette.dark);
+        // fabricLayer.rect(this.x, this.y, this.radius, this.radius);
+        palette.black.setAlpha(100);
     }
 }
