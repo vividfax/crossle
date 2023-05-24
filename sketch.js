@@ -58,7 +58,7 @@ function setup() {
 
     seeBackButton = select("#see-back");
     buttonY = -size/2-20-40;
-    buttonX = -130-5;
+    buttonX = -145-5;
     seeBackButton.style("transform", "translate("+buttonX+"px,"+buttonY+"px)")
     seeBackButton.mousePressed(seeBack);
     seeBackButton.style("display", "inline");
