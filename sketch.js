@@ -61,7 +61,6 @@ function setup() {
     buttonX = -145-5;
     seeBackButton.style("transform", "translate("+buttonX+"px,"+buttonY+"px)")
     seeBackButton.mousePressed(seeBack);
-    seeBackButton.style("display", "inline");
 
     let startDate = new Date("05/22/2023");
     let todayDate = new Date();
@@ -113,7 +112,11 @@ function draw() {
     if (fabric.complete()) displayUI(frontVisible);
 
     resetButton.style("display", "none");
-    if (fabric.complete()) resetButton.style("display", "inline");
+    seeBackButton.style("display", "none");
+    if (fabric.complete()) {
+        resetButton.style("display", "inline");
+        seeBackButton.style("display", "inline");
+    }
 
     pop();
 }
