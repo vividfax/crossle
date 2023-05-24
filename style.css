@@ -9,7 +9,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #322932;
+    background-color: #8C8492;
 }
 
 canvas {
@@ -28,17 +28,23 @@ button {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 200px;
+    width: 130px;
     height: 40px;
-    border-radius: 5px;
-    border-style: none;
+    border-radius: 20px;
+    border: 0.1rem solid #C7BCCE;
     font-size: 1.2rem;
-    color: #322932;
-    background-color: #CEBDBD;
+    color: #FCF7FF;
+    background-color: #8C8492;
     font-family: "Nunito", sans-serif;
 }
 
-button:hover {
-    color: #CEBDBD;
-    background-color: #4B414B;
+#save-image {
+    border: none;
+    color: #583554;
+    background-color: #F6E9FF;
+}
+
+button:hover, #save-image:hover {
+    color: #F6E9FF;
+    background-color: #583554;
 }

@@ -8,12 +8,14 @@ let perlinLayer;
 
 let saveImageButton;
 let resetButton;
+let seeBackButton;
 
 let scoreFont;
 
 let palette;
 
 let puzzleNumber;
+let myNoiseSeed;
 
 let size = 300;
 let mobile = false;
@@ -45,12 +47,21 @@ function setup() {
     saveImageButton = select("#save-image");
     let buttonY = size/2+20;
     saveImageButton.style("transform", "translate(-50%, "+buttonY+"px)")
+    saveImageButton.style("width", "200px")
     saveImageButton.mousePressed(saveImage);
 
     resetButton = select("#reset");
     buttonY = -size/2-20-40;
-    resetButton.style("transform", "translate(-50%, "+buttonY+"px)")
+    let buttonX = 5;
+    resetButton.style("transform", "translate("+buttonX+"px,"+buttonY+"px)")
     resetButton.mousePressed(reset);
+
+    seeBackButton = select("#see-back");
+    buttonY = -size/2-20-40;
+    buttonX = -130-5;
+    seeBackButton.style("transform", "translate("+buttonX+"px,"+buttonY+"px)")
+    seeBackButton.mousePressed(seeBack);
+    seeBackButton.style("display", "inline");
 
     let startDate = new Date("05/22/2023");
     let todayDate = new Date();
@@ -66,8 +77,12 @@ function setup() {
     // seed = "22042023";
     let hash = hashCode(seed);
 
+    myNoiseSeed = int(random(123456789))
     randomSeed(hash);
-    // noiseSeed(seed);
+    if (puzzleNumber == getItem("puzzleNumber")) {
+        myNoiseSeed = getItem("noiseSeed");
+    }
+    noiseSeed(myNoiseSeed);
 
     newGame();
 
@@ -82,12 +97,12 @@ function draw() {
     push();
     translate(width/2-size/2, height/2-size/2);
 
-    if (interacted &&( mouseX < width/2-size/2 || mouseX > width/2+size/2 || mouseY < height/2-size/2 || mouseY > height/2+size/2)) frontVisible = false;
-    else frontVisible = true;
+    // if (interacted &&( mouseX < width/2-size/2 || mouseX > width/2+size/2 || mouseY < height/2-size/2 || mouseY > height/2+size/2)) frontVisible = false;
+    // else frontVisible = true;
 
-    if (document.querySelector('button:hover')) {
-        frontVisible = true;
-    }
+    // if (document.querySelector('button:hover')) {
+    //     frontVisible = true;
+    // }
 
     fabric.update();
     fabric.display(frontVisible);
@@ -110,7 +125,7 @@ function newGame() {
         light: color(random(100), random(40, 60), random(60, 100)),
         mid: color(random(100), 100, 90),
         dark: color(random(100), 100, 30),
-        black: color("#322932"),
+        black: color("#8C8492"),
     }
 
     for (let i = 0; i < size; i++) {
@@ -139,6 +154,7 @@ function mousePressed() {
     if (fabric.complete()) {
         storeItem("puzzleNumber", puzzleNumber);
         storeItem("path", fabric.path);
+        storeItem("noiseSeed", myNoiseSeed);
     }
 }
 
@@ -187,7 +203,7 @@ function saveImage() {
     displayUI(false);
 
     pop();
-    
+
     if (mobile) {
         saveCanvas(canvas, "crossle", "png");
     } else {
@@ -202,6 +218,17 @@ function reset() {
 
     storeItem("puzzleNumber", puzzleNumber);
     storeItem("path", []);
+}
+
+function seeBack() {
+
+    frontVisible = !frontVisible;
+
+    if (frontVisible) {
+        seeBackButton.html("See back");
+    } else {
+        seeBackButton.html("See front");
+    }
 }
 
 function hashCode(str) {
