@@ -9,7 +9,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #8C8492;
+    background-color: #839EA1;
 }
 
 canvas {
@@ -31,20 +31,19 @@ button {
     width: 145px;
     height: 40px;
     border-radius: 20px;
-    border: 0.1rem solid #C7BCCE;
+    border: 0.1rem solid #F2FDFF;
     font-size: 1.2rem;
-    color: #FCF7FF;
-    background-color: #8C8492;
+    color: #F2FDFF;
+    background-color: #839EA1;
     font-family: "Nunito", sans-serif;
 }
 
 #save-image {
-    border: none;
-    color: #583554;
-    background-color: #F6E9FF;
+    color: #2B8D9A;
+    background-color: #F2FDFF;
 }
 
 button:hover, #save-image:hover {
-    color: #F6E9FF;
-    background-color: #583554;
+    color: #F2FDFF;
+    background-color: #2B8D9A;
 }

@@ -45,19 +45,19 @@ function setup() {
     perlinLayer = createGraphics(size, size);
 
     saveImageButton = select("#save-image");
-    let buttonY = size/2+20;
+    let buttonY = size/2+15;
     saveImageButton.style("transform", "translate(-50%, "+buttonY+"px)")
     saveImageButton.style("width", "200px")
     saveImageButton.mousePressed(saveImage);
 
     resetButton = select("#reset");
-    buttonY = -size/2-20-40;
+    buttonY = -size/2-15-40;
     let buttonX = 5;
     resetButton.style("transform", "translate("+buttonX+"px,"+buttonY+"px)")
     resetButton.mousePressed(reset);
 
     seeBackButton = select("#see-back");
-    buttonY = -size/2-20-40;
+    buttonY = -size/2-15-40;
     buttonX = -145-5;
     seeBackButton.style("transform", "translate("+buttonX+"px,"+buttonY+"px)")
     seeBackButton.mousePressed(seeBack);
@@ -128,12 +128,12 @@ function newGame() {
         light: color(random(100), random(40, 60), random(60, 100)),
         mid: color(random(100), 100, 90),
         dark: color(random(100), 100, 30),
-        black: color("#8C8492"),
+        black: color("#839EA1"),
     }
 
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
-            let perlin = noise(i/size*2.5, j/size*2.5);
+            let perlin = noise(i/size, j/size);
             let colour = lerpColor(palette.light, palette.white, perlin);
             perlinLayer.set(i, j, colour);
         }
