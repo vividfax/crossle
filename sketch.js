@@ -161,6 +161,11 @@ function mousePressed() {
     }
 }
 
+function touchStarted() {
+
+    mousePressed();
+}
+
 function displayUI(frontSide) {
 
     push();
