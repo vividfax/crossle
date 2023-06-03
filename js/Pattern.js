@@ -12,7 +12,7 @@ class Pattern {
         this.pattern = [];
 
         for (let i = 0; i < w*h; i++) {
-            if (i < w*h*0.6) this.pattern.push(true);
+            if (i < w*h*0.6-2) this.pattern.push(true);
             else this.pattern.push(false);
         }
 

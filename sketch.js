@@ -29,7 +29,7 @@ function preload() {
 
 function setup() {
 
-    document.addEventListener('touchstart', {});
+    setupTouchEvents();
 
     size = 300;
 
@@ -247,4 +247,21 @@ function hashCode(str) {
         hash |= 0; // Convert to 32bit integer
     }
     return hash;
+}
+
+function setupTouchEvents() {
+
+    document.addEventListener("gesturestart", absorbEvent);
+    document.addEventListener("gesturechange", absorbEvent);
+    document.addEventListener("gestureend", absorbEvent);
+    document.addEventListener("touchstart", absorbEvent);
+    document.addEventListener("touchend", absorbEvent);
+    document.addEventListener("touchmove", absorbEvent);
+    document.addEventListener("touchcancel", absorbEvent);
+}
+
+function absorbEvent(event) {
+
+    event.preventDefault();
+    event.returnValue = false;
 }
