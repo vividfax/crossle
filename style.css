@@ -46,3 +46,14 @@ button:hover, #save-image:hover {
     color: #F2FDFF;
     background-color: #2B8D9A;
 }
+
+#p5_loading {
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-family: "Nunito", sans-serif;
+    color: #F2FDFF;
+}

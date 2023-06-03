@@ -251,13 +251,13 @@ function hashCode(str) {
 
 function setupTouchEvents() {
 
-    document.addEventListener("gesturestart", absorbEvent);
-    document.addEventListener("gesturechange", absorbEvent);
-    document.addEventListener("gestureend", absorbEvent);
-    document.addEventListener("touchstart", absorbEvent);
-    document.addEventListener("touchend", absorbEvent);
-    document.addEventListener("touchmove", absorbEvent);
-    document.addEventListener("touchcancel", absorbEvent);
+    canvas.addEventListener("gesturestart", absorbEvent);
+    canvas.addEventListener("gesturechange", absorbEvent);
+    canvas.addEventListener("gestureend", absorbEvent);
+    canvas.addEventListener("touchstart", absorbEvent);
+    canvas.addEventListener("touchend", absorbEvent);
+    canvas.addEventListener("touchmove", absorbEvent);
+    canvas.addEventListener("touchcancel", absorbEvent);
 }
 
 function absorbEvent(event) {
