@@ -62,7 +62,7 @@ function setup() {
     seeBackButton.style("transform", "translate("+buttonX+"px,"+buttonY+"px)")
     seeBackButton.mousePressed(seeBack);
 
-    let startDate = new Date("05/22/2023");
+    let startDate = new Date("09/30/2023");
     let todayDate = new Date();
     let difference = todayDate.getTime()-startDate.getTime();
     puzzleNumber = int(difference/(1000*60*60*24));
